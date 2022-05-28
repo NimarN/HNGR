@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title %}{%endblock%}HUNGR</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='StyleBase.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        <h3 class="logo">HNGR</h3>
+        <div class="links">
+            {% if g.user %}
+            <span> {{ g.user['username'] }}</span>
+            <a href="{{ url_for('auth.logout') }}"></a>
+            {% else %}
+            <a href="{{ url_for('auth.login') }}" class="log-in">Log In</a>
+            <a href = "{{url_for('auth.register')}}" id="sign-up">Sign Up</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <section class="content">
+        <header>
+          {% block header %}{% endblock %}
+        </header>
+        {% for message in get_flashed_messages() %}
+          <div class="flash">{{ message }}</div>
+        {% endfor %}
+        {% block content %}{% endblock %}
+    </section>
+
+</body>
+</html>

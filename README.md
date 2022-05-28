@@ -5,7 +5,6 @@ This project will use html/css/javascript as well as python, flask and sqlite3 i
 
 
 
-
 To run this web app you need flask downloaded , 
 here is a link to find installation instructions: https://flask.palletsprojects.com/en/2.1.x/installation/
 

@@ -10,8 +10,10 @@ here is a link to find installation instructions: https://flask.palletsprojects.
 
 to run the project you need to run these lines of code in your terminal:
 
-$ export FLASK_APP=flaskr
+$ export FLASK_APP=flaskr 
+
 $ export FLASK_ENV=development
+
 $ flask run
 
 

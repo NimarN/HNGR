@@ -30,24 +30,26 @@
         {% for message in get_flashed_messages() %}
           <div class="flash">{{ message }}</div>
         {% endfor %}
-        {% block content %}{% endblock %}
+        
     </section>
 
     <div class="about">
         <h3 class="hngr"><span class="h">H</span>N<span class="g">G</span>R</h3>   
-        <div class="info">
-            <input class="location_input" type="text" placeholder="Location">
-            <select class="type" name="type" >               
+        {% block content %}
+        <form method="post" class="info">
+            <input id="location" class="location_input" type="text" name="location" placeholder="Location" required>
+            <select type="text" id="type" class="type" name="type" >   
                 <option value="restaurants">Restaurants</option>
                 <option value="bars">Bars</option>
                 <option value="cafes">Cafes</option>
                 <option value="fast-food">Fast Food</option>
                 <option value="all">All types</option>
             </select>
-            <span class="material-icons-sharp">
-                search
-            </span>
-        </div> 
+            <button type="submit" value = '' id = "searchBtn" class="material-icons-sharp">
+            search
+            </button>
+        </form> 
+        {% endblock %}
     </div>
 </body>
 </html>

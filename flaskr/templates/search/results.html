@@ -2,10 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Results</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
 </head>
 <body>
-    <p> Here are the results for {{type}} in {{ location }} </p>
+  <div class="navbar">
+    <a href="{{url_for('home.index')}} " class="logo">HNGR</a>
+    <div class="links">
+        {% if g.user %}
+        <span> {{ g.user['username'] }}</span>
+        <a href="{{ url_for('auth.logout') }}"></a>
+        {% else %}
+        <a href="{{ url_for('auth.login') }}" class="log-in">Log In</a>
+        <a href = "{{url_for('auth.register')}}" id="sign-up">Sign Up</a>
+        {% endif %}
+    </div>
+  </div>
+  {% block content %}
+  <form method="post" class="info">
+      <input id="location" class="location_input" type="text" name="location" placeholder="Location: City, State" required>
+      <select type="text" id="type" class="type" name="type" >   
+          <option value="Restaurants">Restaurants</option>
+          <option value="Bars">Bars</option>
+          <option value="Cafes">Cafes</option>
+          <option value="Fast-Food">Fast Food</option>
+          
+      </select>
+      <button type="submit" value = '' id = "searchBtn" class="material-icons-sharp">
+      search
+      </button>
+  </form> 
+  {% endblock %}
+  {% if type and location %}
+  <h3 class="resultTitle">Results for <span class="type">{{type}}</span> in <span id="locationSearch">{{location}}</span></h3>
+  
+  {% else %}
+  <h3 class="resultError">Could not load results, please try searching for a different location</h3>
+  {% endif %}
+  <script> 
+    function addElement(name, address, website, phoneNumber){
+    //create a new div element
+    var newDiv = document.createElement("div");
+    newDiv.className = "results";
+    
+    
+    var nameTag = document.createElement("p");
+    nameTag.className = "businessName"
+    
+    var addressTag = document.createElement("p");
+    var websiteTag = document.createElement("a");
+    websiteTag.href = website;
+    var phoneNumberTag = document.createElement("p");
+
+    nameTag.innerHTML = name;
+    addressTag.innerHTML = address;
+    websiteTag.innerHTML = website;
+    phoneNumberTag.innerHTML = phoneNumber;
+
+    newDiv.appendChild(nameTag);
+    newDiv.appendChild(addressTag);
+    newDiv.appendChild(websiteTag);
+    newDiv.appendChild(phoneNumberTag);
+
+    var currDiv = document.getElementById("placeholder");
+    document.body.insertBefore(newDiv, currDiv);}
+
+    var obj = '{{ poi_dict|tojson }}';
+    var searchResults = JSON.parse(obj);
+
+    let resourceSets = searchResults["resourceSets"][0]["resources"];
+    for (i = 0; i < resourceSets.length; i++){
+      let businessName = resourceSets[i]["name"];
+      let address = resourceSets[i]["Address"]["formattedAddress"];
+      let website = resourceSets[i]["Website"];
+      let phoneNumber = resourceSets[i]["PhoneNumber"];
+      addElement(businessName, address, website, phoneNumber)};
+    </script>
+    <div id="placeholder"></div>
 </body>
 </html>

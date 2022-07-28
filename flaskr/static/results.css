@@ -92,10 +92,14 @@ html, body{
 }
 
 .info .location_input{
+    position: relative;
     outline: none;
     margin: auto;
     margin-left: 2px;
-    border: none;
+    border-right: 2px solid rgb(206, 202, 202);
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
     height: 30px;
     width: 45%;
 }
@@ -156,4 +160,37 @@ html, body{
     white-space: pre-wrap;
     word-break: break-word;
 }
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    width: 200px;
+    max-height: 200px;
+    min-height:fit-content;
+    border-bottom: none;
+    overflow-y:auto;
+    margin-top: 47px;
+    z-index: 99;
+
+}
+
+.autocomplete-items div{
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+    padding: 10px;
+}
+
+.autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+  }
+  
+.autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+
+
+
 

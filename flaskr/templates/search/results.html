@@ -9,12 +9,13 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
 </head>
 <body>
+  <script src="{{url_for('static', filename='autosuggest.js')}}"></script>
   <div class="navbar">
     <a href="{{url_for('home.index')}} " class="logo">HNGR</a>
     <div class="links">
         {% if g.user %}
-        <span> {{ g.user['username'] }}</span>
-        <a href="{{ url_for('auth.logout') }}"></a>
+        <span>Welcome, {{ g.user['username'] }}</span>
+        <a href="{{ url_for('auth.logout') }}">Log Out</a>
         {% else %}
         <a href="{{ url_for('auth.login') }}" class="log-in">Log In</a>
         <a href = "{{url_for('auth.register')}}" id="sign-up">Sign Up</a>
@@ -22,8 +23,11 @@
     </div>
   </div>
   {% block content %}
-  <form method="post" class="info">
+  <form method="post" class="info" autocomplete="off">
       <input id="location" class="location_input" type="text" name="location" placeholder="Location: City, State" required>
+      <script>
+        autocomplete(document.getElementById("location"), cities);
+      </script>
       <select type="text" id="type" class="type" name="type" >   
           <option value="Restaurants">Restaurants</option>
           <option value="Bars">Bars</option>

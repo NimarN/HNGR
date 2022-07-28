@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <script src="static/autosuggest.js"></script>
     <div class="navbar">
         <img class="logo" src="../static/images/hungr_logo.png">
         <div class="links">
@@ -36,8 +37,11 @@
     <div class="about">
         <h3 class="hngr"><span class="h">H</span>N<span class="g">G</span>R</h3>   
         {% block content %}
-        <form method="post" class="info">
+        <form autocomplete="off" method="post" class="info">
             <input id="location" class="location_input" type="text" name="location" placeholder="Location: City, State" required>
+            <script>
+                autocomplete(document.getElementById("location"), cities);
+            </script>
             <select type="text" id="type" class="type" name="type" >   
                 <option value="Restaurants">Restaurants</option>
                 <option value="Bars">Bars</option>
@@ -47,7 +51,9 @@
             <button type="submit" value = '' id = "searchBtn" class="material-icons-sharp">
             search
             </button>
+            
         </form> 
+
         {% endblock %}
     </div>
 </body>

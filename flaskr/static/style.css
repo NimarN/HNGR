@@ -68,7 +68,7 @@ html, body{
     margin-left: -25px;
     margin-right: -25px;
     width: auto;
-    height: 80%;
+    height: 88%;
     background: #fff url("images/background_2.png") center center/cover no-repeat;
 
 }
@@ -144,6 +144,7 @@ html, body{
 .autocomplete-items {
     position: absolute;
     border: 1px solid #d4d4d4;
+    border-radius: 10px;
     width: 225px;
     max-height: 200px;
     min-height:fit-content;

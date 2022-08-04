@@ -1,1 +1,1 @@
-web: gunicorn HNGR.wsgi
+web: gunicorn flaskr:create_app

@@ -23,19 +23,19 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-
-    # a simple page that says hello
-  
-
+    
     from . import db
     db.init_app(app)
 
+    #register the log in and register pages
     from . import auth
     app.register_blueprint(auth.bp)
 
+    #register home pages
     from . import home 
     app.register_blueprint(home.bp)
 
+    #register 
     from . import search
     app.register_blueprint(search.bp)
     

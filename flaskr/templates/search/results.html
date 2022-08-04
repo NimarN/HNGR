@@ -26,6 +26,7 @@
   <form method="post" class="info" autocomplete="off">
       <input id="location" class="location_input" type="text" name="location" placeholder="Location: City, State" required>
       <script>
+        //calls autocomplete function from autocomplete.js to autosuggest location for users
         autocomplete(document.getElementById("location"), cities);
       </script>
       <select type="text" id="type" class="type" name="type" >   
@@ -47,25 +48,34 @@
   <h3 class="resultError">Could not load results, please try searching for a different location</h3>
   {% endif %}
   <script> 
+  /*this function takes in the name, address, website, and phone number 
+  and dynamically updatea the webpage to store all the results returned from localSearch() from hngrGeocode.py*/
     function addElement(name, address, website, phoneNumber){
-    //create a new div element
+    //create a new div element class = results, stores all results
     var newDiv = document.createElement("div");
     newDiv.className = "results";
     
-    
+    //create new p tag class = businessName, stores business names
     var nameTag = document.createElement("p");
     nameTag.className = "businessName"
     
+    //creates p tag to store address of business
     var addressTag = document.createElement("p");
+    
+    //creates a tag to store link of website
     var websiteTag = document.createElement("a");
-    websiteTag.href = website;
-    var phoneNumberTag = document.createElement("p");
 
+    //creates p tag that stores phone number of business
+    var phoneNumberTag = document.createElement("p");
+    
+    //add the paramaters to their tags
+    websiteTag.href = website;
     nameTag.innerHTML = name;
     addressTag.innerHTML = address;
     websiteTag.innerHTML = website;
     phoneNumberTag.innerHTML = phoneNumber;
-
+    
+    //add the previously created tags to results div
     newDiv.appendChild(nameTag);
     newDiv.appendChild(addressTag);
     newDiv.appendChild(websiteTag);
@@ -73,7 +83,9 @@
 
     var currDiv = document.getElementById("placeholder");
     document.body.insertBefore(newDiv, currDiv);}
-
+    
+    /*takes in the json object that localSearch returns from hngrGeocode.py. Parse the json and 
+    saves the data it recieves to pass as paramaters to addElement function*/
     var obj = '{{ poi_dict|tojson }}';
     var searchResults = JSON.parse(obj);
 

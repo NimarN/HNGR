@@ -6,8 +6,8 @@ import ssl
 
 from flaskr.search import results
 
-
-
+#define the geolocation function, takes in string location, uses geopy api call, 
+# returns latitude and longitude of location as a string
 
 def geoLocate(location):
 
@@ -19,7 +19,9 @@ def geoLocate(location):
     stringlatLong = lat + ',' + long
     return stringlatLong
     
-
+#Local search function takes the location and type input the user inputs from search 
+# and makes a call to Bing maps api to return the Type of business near Location 
+#return type is a json object that is passed to the client side javascript 
 def localSearch(location, type):
     
     ssl._create_default_https_context = ssl._create_unverified_context

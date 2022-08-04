@@ -40,6 +40,7 @@
         <form autocomplete="off" method="post" class="info">
             <input id="location" class="location_input" type="text" name="location" placeholder="Location: City, State" required>
             <script>
+                //calls the autocomplete function in autocomplete.js to autosuggest location for users
                 autocomplete(document.getElementById("location"), cities);
             </script>
             <select type="text" id="type" class="type" name="type" >   
